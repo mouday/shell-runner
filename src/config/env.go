@@ -10,36 +10,28 @@ func init() {
 	gotenv.Load()
 }
 
-func GetEnv() string {
-	env := os.Getenv("GIN_MODE")
+func GetEnv(key string, defaultValue string) string {
 
-	if env == "" {
-		// env = "release"
-		env = "release"
+	value := os.Getenv(key)
+
+	if value == "" {
+		value = defaultValue
 	}
 
-	return env
+	return value
 }
+
+func GetGinMode() string {
+	return GetEnv("GIN_MODE", "release")
+}
+
+// 启动服务端口
 func GetAppRunAddress() string {
-	// 启动服务
-	appRunAddress := os.Getenv("APP_RUN_ADDRESS")
-
-	if appRunAddress == "" {
-		appRunAddress = "127.0.0.1:8000"
-	}
-
-	return appRunAddress
+	return GetEnv("APP_RUN_ADDRESS", "127.0.0.1:8000")
 }
 
 func GetAppAdminUsername() string {
-	username := os.Getenv("APP_ADMIN_USERNAME")
-
-	if username == "" {
-		username = "admin"
-	}
-
-	return username
-
+	return GetEnv("APP_ADMIN_USERNAME", "admin")
 }
 
 func GetAppAdminPassword() string {
@@ -55,4 +47,8 @@ func GetAppAdminPassword() string {
 
 func GetToken() string {
 	return os.Getenv("APP_TOKEN")
+}
+
+func GetScriptDir() string {
+	return GetEnv("APP_SCRIPT_DIR", "./scripts")
 }

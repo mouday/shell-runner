@@ -1,1 +1,3 @@
-echo 'hello' && x
+#! /bin/bash
+
+echo 'hello'

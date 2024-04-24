@@ -7,21 +7,34 @@ import (
 	"github.com/mouday/cron-runner-shell/src/vo"
 )
 
-
 /*
- * 登录
+ * 运行脚本
  */
 func RunScript(ctx *gin.Context) {
 	name := ctx.Query("name")
-	token := ctx.Request.Header.Get("X-Token")
+	token := ctx.GetHeader("X-Token")
 
-	if name == "" || token == "" || token != config.GetToken() {
-	    vo.Error(ctx, -1, "token无效")
-	} else {
+	// 校验token
+	if token == "" || token != config.GetToken() {
+		vo.Error(ctx, -1, "token无效")
+		return
+	}
+
+	// 校验脚本名称
+	if name == "" || !utils.ValidateScriptName(name) {
+		vo.Error(ctx, -1, "脚本名称不合法")
+		return
+	}
+
+	// 校验脚本是否存在
+	if !utils.CheckScriptExists(name) {
+		vo.Error(ctx, -1, "脚本不存在")
+		return
+	}
+
 	// 异步运行
-	go utils.RunShellScript("scripts", name)
+	go utils.RunShellScript(name)
 
 	vo.Success(ctx, nil)
-	}
 
 }

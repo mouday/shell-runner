@@ -7,7 +7,5 @@ import (
 
 /* 注册路由 */
 func RegistRouter(app *gin.Engine) {
-
-	app.POST("/api/runScript", api.RunScript)
-
+	app.POST("/run", api.RunScript)
 }
