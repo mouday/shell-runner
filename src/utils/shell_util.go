@@ -2,13 +2,21 @@ package utils
 
 import (
 	"bufio"
+	"fmt"
 	"io"
 	"log"
 	"os/exec"
 	"path/filepath"
+	"sync"
 
 	"github.com/mouday/cron-runner-shell/src/config"
 )
+
+// 等待队列
+var TaskWaitChannel = make(chan string, 16)
+
+// 去重
+var TaskMap sync.Map
 
 // https://www.cnblogs.com/-wenli/p/12026413.html
 func GetScriptPath(scriptName string) string {
@@ -41,18 +49,21 @@ func RunShellScript(scriptName string) {
 	stdout, _ := cmd.StdoutPipe()
 	stderr, _ := cmd.StderrPipe()
 
+	// 启动
 	if err := cmd.Start(); err != nil {
 		log.Printf("Error Start: %s", err.Error())
+
 		return
 	}
 
 	go asyncLog(stdout)
 	go asyncLog(stderr)
 
+	// 结束
 	if err := cmd.Wait(); err != nil {
 		log.Printf("Error waiting: %s", err.Error())
-		return
 	}
+
 }
 
 // ref: https://blog.csdn.net/xuezhangjun0121/article/details/135284214
@@ -68,5 +79,31 @@ func asyncLog(std io.ReadCloser) {
 		}
 
 		log.Printf("out: %s", line)
+	}
+}
+
+func Consumer() {
+	for {
+		name, ok := <-TaskWaitChannel
+		if ok {
+			// 队列中没有了就可以
+			TaskMap.Delete(name)
+			RunShellScript(name)
+		} else {
+			break
+		}
+	}
+
+	fmt.Println("consumer done")
+}
+
+func AppendTask(name string) {
+	// 队列去重，合并等待任务
+	_, loaded := TaskMap.LoadOrStore(name, true)
+
+	if !loaded {
+		TaskWaitChannel <- name
+	} else {
+		log.Printf("script already in queue: %v", name)
 	}
 }

@@ -33,7 +33,7 @@ func RunScript(ctx *gin.Context) {
 	}
 
 	// 异步运行
-	go utils.RunShellScript(name)
+	utils.AppendTask(name)
 
 	vo.Success(ctx, nil)
 
