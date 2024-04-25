@@ -1,28 +1,24 @@
 # Shell Runner 
 
-使用方法
+Shell Runner 是一个基于Go语言编写的shell脚本执行工具，通过http请求触发shell脚本异步执行。
 
-安装之后通过http请求触发异步执行
+使用场景
 
-例如：
+1. 可配合代码仓库的代码推送事件，通过webhook触发代码打包编译使用
+2. 通过http请求远程执行某些命令，例如：定时任务
 
-在目录`scripts` 下有一个脚本`hello.sh`
+## 安装
+
+1、下载适合所在平台的可执行文件
+
+[https://github.com/mouday/shell-runner/releases](https://github.com/mouday/shell-runner/releases)
+
+
+2、配置环境变量
 
 ```bash
-/scripts
-    /hello.sh
+cp env.example .env
 ```
-
-可以通过http请求执行
-
-```bash
-POST http://localhost:8000/run?name=hello
-Content-Type: application/json; charset=utf-8
-X-Token: <token>
-
-```
-
-> 注意：token必须填写，在环境变量中配置
 
 配置文件`.env`
 
@@ -41,6 +37,43 @@ APP_TOKEN=
 APP_SCRIPT_DIR=./scripts
 ```
 
+3、启动
+
+```bash
+# macos: 
+./shell-runner
+
+# linux: 
+./shell-runner
+
+# windows: 
+shell-runner.exe
+```
+
+## 使用
+
+
+例如：
+
+在目录`scripts` 下有一个脚本`hello.sh`
+
+```bash
+./scripts
+    /hello.sh
+```
+
+可以通过http请求执行
+
+```bash
+POST http://localhost:8000/run?name=hello
+Content-Type: application/json; charset=utf-8
+X-Token: <token>
+
+```
+
+> 注意：token必须填写，在环境变量中配置
+
+
 ## 通过systemd让进程自动启动
 
-
+略
