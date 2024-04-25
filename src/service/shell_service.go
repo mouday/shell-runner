@@ -1,4 +1,4 @@
-package utils
+package service
 
 import (
 	"bufio"
@@ -10,6 +10,7 @@ import (
 	"sync"
 
 	"github.com/mouday/cron-runner-shell/src/config"
+	"github.com/mouday/cron-runner-shell/src/utils"
 )
 
 // 等待队列
@@ -26,7 +27,7 @@ func GetScriptPath(scriptName string) string {
 func CheckScriptExists(scriptName string) bool {
 	scriptPath := GetScriptPath(scriptName)
 	log.Printf("Check scriptPath: %v", scriptPath)
-	return FileExists(scriptPath)
+	return utils.FileExists(scriptPath)
 }
 
 func RunShellScript(scriptName string) {

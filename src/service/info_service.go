@@ -1,4 +1,4 @@
-package utils
+package service
 
 import (
 	"fmt"
@@ -12,6 +12,7 @@ func EchoInfo() {
 	fmt.Println("* Welcome Use Shell Runner", config.VERSION)
 	fmt.Println("* server run at: ", "http://"+config.GetAppRunAddress())
 	fmt.Println("* issue: https://github.com/mouday/shell-runner")
+	fmt.Println("* X-Token: ", config.GetToken())
 	fmt.Println("********************************************")
 
 }

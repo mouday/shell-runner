@@ -3,8 +3,12 @@ package config
 import (
 	"os"
 
+	"github.com/mouday/cron-runner-shell/src/utils"
 	"github.com/subosito/gotenv"
 )
+
+// token 路径
+const TOKEN_FILE_PATH = "./token.txt"
 
 func init() {
 	gotenv.Load()
@@ -45,10 +49,26 @@ func GetAppAdminPassword() string {
 
 }
 
-func GetToken() string {
-	return os.Getenv("APP_TOKEN")
-}
-
 func GetScriptDir() string {
 	return GetEnv("APP_SCRIPT_DIR", "./scripts")
+}
+
+func GetToken() string {
+	var token string
+
+	// 尝试从文件中读取
+	if utils.FileExists(TOKEN_FILE_PATH) {
+		content, err := os.ReadFile(TOKEN_FILE_PATH)
+		if err == nil {
+			token = string(content)
+		}
+	}
+
+	// 读取失败则新生成一个
+	if token == "" {
+		token = utils.GetUuidV4()
+		os.WriteFile(TOKEN_FILE_PATH, []byte(token), 0644)
+	}
+
+	return token
 }

@@ -14,30 +14,7 @@ Shell Runner 是一个基于Go语言编写的shell脚本执行工具，通过htt
 [https://github.com/mouday/shell-runner/releases](https://github.com/mouday/shell-runner/releases)
 
 
-2、配置环境变量
-
-```bash
-cp env.example .env
-```
-
-配置文件`.env`
-
-```bash
-# == 应用配置 ==
-# 运行模式 debug test release (默认：release)
-GIN_MODE=release
-
-# 监听端口 (默认：127.0.0.1:8000）
-APP_RUN_ADDRESS=127.0.0.1:8000
-
-# 权限 token 必填，若为空，则无法调用接口
-APP_TOKEN=
-
-# 脚本存放目录
-APP_SCRIPT_DIR=./scripts
-```
-
-3、启动
+2、启动
 
 ```bash
 # macos: 
@@ -50,8 +27,9 @@ APP_SCRIPT_DIR=./scripts
 shell-runner.exe
 ```
 
-## 使用
+启动后会生成一个token，用作权限校验
 
+## 使用
 
 例如：
 
@@ -80,6 +58,25 @@ X-Token: <token>
 
 > 注意：token必须填写，和环境变量中配置一致
 
+## 配置环境变量
+
+```bash
+cp env.example .env
+```
+
+配置文件`.env`
+
+```bash
+# == 应用配置 ==
+# 运行模式，可选: debug/test/release (默认：release)
+GIN_MODE=release
+
+# 监听端口 (默认：127.0.0.1:8000）
+APP_RUN_ADDRESS=127.0.0.1:8000
+
+# 脚本存放目录 (默认：./scripts)
+APP_SCRIPT_DIR=./scripts
+```
 
 ## 通过systemd让进程自动启动
 

@@ -3,6 +3,7 @@ package api
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/mouday/cron-runner-shell/src/config"
+	"github.com/mouday/cron-runner-shell/src/service"
 	"github.com/mouday/cron-runner-shell/src/utils"
 	"github.com/mouday/cron-runner-shell/src/vo"
 )
@@ -27,13 +28,13 @@ func RunScript(ctx *gin.Context) {
 	}
 
 	// 校验脚本是否存在
-	if !utils.CheckScriptExists(name) {
+	if !service.CheckScriptExists(name) {
 		vo.Error(ctx, -1, "脚本不存在")
 		return
 	}
 
 	// 异步运行
-	utils.AppendTask(name)
+	service.AppendTask(name)
 
 	vo.Success(ctx, nil)
 
