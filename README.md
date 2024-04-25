@@ -40,3 +40,7 @@ APP_TOKEN=
 # 脚本存放目录
 APP_SCRIPT_DIR=./scripts
 ```
+
+## 通过systemd让进程自动启动
+
+

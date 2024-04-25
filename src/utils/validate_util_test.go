@@ -27,4 +27,8 @@ func TestGetRandomString(t *testing.T) {
 	if ValidateScriptName("_") != true {
 		t.Error("ValidateScriptName failed")
 	}
+
+	if ValidateScriptName("-") != true {
+		t.Error("ValidateScriptName failed")
+	}
 }

@@ -1,0 +1,12 @@
+# systemd config
+# /usr/lib/systemd/system/shell-runner.service
+[Unit]
+Description=Shell Runner
+
+[Service]
+WorkingDirectory=/opt/shell-runner
+ExecStart=/opt/shell-runner/shell-runner
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
