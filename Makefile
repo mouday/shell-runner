@@ -33,26 +33,32 @@ build:
 # 发布linux
 .PHONY: release-linux
 release-linux:
-	mkdir -p ./release/linux
-	cp ./env.example ./release/linux/
-	cp ./build/linux/shell-runner ./release/linux/
-	tar -zcvf release/shell-runner-$(version)-linux-amd64.tar.gz -C ./release/linux/ .
+	mkdir -p ./release/linux/shell-runner-$(version)-linux-amd64/
+	cp ./env.example ./release/linux/shell-runner-$(version)-linux-amd64/
+	cp -r ./scripts ./release/linux/shell-runner-$(version)-linux-amd64/
+	cp -r ./config ./release/linux/shell-runner-$(version)-linux-amd64/
+	cp ./build/linux/shell-runner ./release/linux/shell-runner-$(version)-linux-amd64/
+	tar -zcvf release/shell-runner-$(version)-linux-amd64.tar.gz -C ./release/linux/ ./shell-runner-$(version)-linux-amd64
 
 # 发布darwin
 .PHONY: release-darwin
 release-darwin:
-	mkdir -p ./release/darwin
-	cp ./env.example ./release/darwin/
-	cp ./build/darwin/shell-runner ./release/darwin/
-	tar -zcvf release/shell-runner-$(version)-darwin-amd64.tar.gz -C ./release/darwin/ .
+	mkdir -p ./release/darwin/shell-runner-$(version)-darwin-amd64/
+	cp ./env.example ./release/darwin/shell-runner-$(version)-darwin-amd64/
+	cp -r ./scripts ./release/darwin/shell-runner-$(version)-darwin-amd64/
+	cp -r ./config ./release/darwin/shell-runner-$(version)-darwin-amd64/
+	cp ./build/darwin/shell-runner ./release/darwin/shell-runner-$(version)-darwin-amd64/
+	tar -zcvf release/darwin/shell-runner-$(version)-darwin-amd64.tar.gz -C ./release/darwin/ ./shell-runner-$(version)-darwin-amd64
 
 # 发布windows
 .PHONY: release-windows
 release-windows:
-	mkdir -p ./release/windows
-	cp ./env.example ./release/windows/
-	cp ./build/windows/shell-runner.exe ./release/windows/
-	zip -j release/shell-runner-$(version)-windows-amd64.zip ./release/windows/*
+	mkdir -p ./release/windows/shell-runner-$(version)-windows-amd64/
+	cp ./env.example ./release/windows/shell-runner-$(version)-windows-amd64/
+	cp -r ./scripts ./release/windows/shell-runner-$(version)-windows-amd64/
+	cp -r ./config ./release/windows/shell-runner-$(version)-windows-amd64/
+	cp ./build/windows/shell-runner.exe ./release/windows/shell-runner-$(version)-windows-amd64/
+	pushd ./release/windows && zip -r ../shell-runner-$(version)-windows-amd64.zip shell-runner-$(version)-windows-amd64/; popd
 
 # 发布全平台
 # make release
