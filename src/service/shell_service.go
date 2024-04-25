@@ -79,7 +79,7 @@ func asyncLog(std io.ReadCloser) {
 			break
 		}
 
-		log.Printf("out: %s", line)
+		log.Print(line)
 	}
 }
 
