@@ -67,6 +67,8 @@ func GetToken() string {
 	// 读取失败则新生成一个
 	if token == "" {
 		token = utils.GetUuidV4()
+		// ref: https://zhuanlan.zhihu.com/p/48529974
+		// 0644->即用户具有读写权限，组用户和其它用户具有只读权限
 		os.WriteFile(TOKEN_FILE_PATH, []byte(token), 0644)
 	}
 

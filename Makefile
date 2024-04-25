@@ -58,7 +58,7 @@ release-windows:
 	cp -r ./scripts ./release/windows/shell-runner-$(version)-windows-amd64/
 	cp -r ./config ./release/windows/shell-runner-$(version)-windows-amd64/
 	cp ./build/windows/shell-runner.exe ./release/windows/shell-runner-$(version)-windows-amd64/
-	pushd ./release/windows && zip -r ../shell-runner-$(version)-windows-amd64.zip shell-runner-$(version)-windows-amd64/; popd
+	cd ./release/windows && zip -r ../shell-runner-$(version)-windows-amd64.zip shell-runner-$(version)-windows-amd64/; cd -
 
 # 发布全平台
 # make release
