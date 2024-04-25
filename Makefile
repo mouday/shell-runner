@@ -48,7 +48,7 @@ release-darwin:
 	cp -r ./scripts ./release/darwin/shell-runner-$(version)-darwin-amd64/
 	cp -r ./config ./release/darwin/shell-runner-$(version)-darwin-amd64/
 	cp ./build/darwin/shell-runner ./release/darwin/shell-runner-$(version)-darwin-amd64/
-	tar -zcvf release/darwin/shell-runner-$(version)-darwin-amd64.tar.gz -C ./release/darwin/ ./shell-runner-$(version)-darwin-amd64
+	tar -zcvf release/shell-runner-$(version)-darwin-amd64.tar.gz -C ./release/darwin/ ./shell-runner-$(version)-darwin-amd64
 
 # 发布windows
 .PHONY: release-windows
