@@ -7,6 +7,17 @@ Shell Runner 是一个基于Go语言编写的shell脚本执行工具，通过htt
 1. 可配合代码仓库的代码推送事件，通过webhook触发代码打包编译使用
 2. 通过http请求远程执行某些命令，例如：定时任务
 
+目的是替换jenkins的一部分功能，jenkins需要在java的环境下才能运行
+
+依赖 | 大小
+--- | ---
+OpenJDK8U-jdk_aarch64_linux_hotspot_8u402b06.tar.gz
+ | 97.4 MB
+jenkins-war-stable-2.346.3.war | 86.97 MB
+```
+
+可以看到，整个运行环境大小接近200MB，而Shell Runner 不到10MB
+
 ## 安装
 
 1、下载适合所在平台的可执行文件
