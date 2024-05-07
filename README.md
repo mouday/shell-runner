@@ -36,7 +36,7 @@ tar -zxvf shell-runner-v1.0.2-linux-amd64.tar.gz
 mv shell-runner-v1.0.2-linux-amd64 shell-runner
 
 # 进入目录
-cd shell-runner-v1.0.2-linux-amd64
+cd shell-runner
 ```
 
 
