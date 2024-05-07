@@ -11,10 +11,9 @@ Shell Runner 是一个基于Go语言编写的shell脚本执行工具，通过htt
 
 依赖 | 大小
 --- | ---
-OpenJDK8U-jdk_aarch64_linux_hotspot_8u402b06.tar.gz
- | 97.4 MB
+OpenJDK8U-jdk_aarch64_linux_hotspot_8u402b06.tar.gz | 97.4 MB
 jenkins-war-stable-2.346.3.war | 86.97 MB
-```
+
 
 可以看到，整个运行环境大小接近200MB，而Shell Runner 不到10MB
 
